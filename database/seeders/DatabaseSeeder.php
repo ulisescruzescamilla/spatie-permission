@@ -25,7 +25,10 @@ class DatabaseSeeder extends Seeder
         $permissions = Permission::create(['name' => 'show articles']);
         $permissions = Permission::create(['name' => 'edit articles',]);
 
-        $user->givePermissionTo($permissions);
+        $user->givePermissionTo([
+            'show articles',
+            'edit articles'
+        ]);
 
         $userNoPermission = \App\Models\User::factory()->create([
             'name' => 'Test User No Permission',
