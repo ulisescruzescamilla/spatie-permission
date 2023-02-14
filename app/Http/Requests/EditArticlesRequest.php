@@ -23,7 +23,8 @@ class EditArticlesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string|max:255', // required field text, 255 characters maximum
+            'content' => 'required|string'// required field text
         ];
     }
 }

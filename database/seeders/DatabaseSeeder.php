@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Article;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 
@@ -20,9 +22,17 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        $permission = Permission::create(['name' => 'edit articles']);
+        $permissions = Permission::create(['name' => 'show articles']);
+        $permissions = Permission::create(['name' => 'edit articles',]);
 
-        $user->givePermissionTo('edit articles');
+        $user->givePermissionTo($permissions);
+
+        $userNoPermission = \App\Models\User::factory()->create([
+            'name' => 'Test User No Permission',
+            'email' => 'nopermissions@example.com',
+        ]);
+
+        Article::factory(50)->create();
 
     }
 }
